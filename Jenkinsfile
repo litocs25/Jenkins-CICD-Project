@@ -62,7 +62,7 @@ pipeline {
         stage('SonarQube scanning') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    withCredentials([string(credentialsId: 'admin', variable: 'admin123')]) {
+                    withCredentials([string(credentialsId: 'admin', variable: 'admin')]) {
                         sh """
                     mvn sonar:sonar \
                     -Dsonar.projectKey=Canvacicd \
