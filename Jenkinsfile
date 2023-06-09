@@ -66,8 +66,8 @@ pipeline {
                         sh """
                     mvn sonar:sonar \
                     -Dsonar.projectKey=Canvacicd \
-                    -Dsonar.host.url=http://172.31.26.25:9000 \
-                    -Dsonar.login=b4a51de1209f9712bc3dc8d709621108ee9957d7
+                    -Dsonar.host.url=http://54.90.138.163:9000 \
+                    -Dsonar.login=e272f2302fde0edc50634ed4e2f4143dc9169527
                     """
                     }
                 }
