@@ -59,6 +59,15 @@ pipeline {
             }
         }
 
+        stage('SonarQube Scan') {
+      steps {
+        sh """mvn sonar:sonar \
+              -Dsonar.projectKey=JavaWebApp \
+              -Dsonar.host.url=http://172.31.29.247:9000 \
+              -Dsonar.e272f2302fde0edc50634ed4e2f4143dc9169527"""
+        }
+    }
+     
         stage('SonarQube scanning') {
             steps {
                 withSonarQubeEnv('SonarQube') {
@@ -67,8 +76,7 @@ pipeline {
                     mvn sonar:sonar \
                     -Dsonar.projectKey=Canvacicd \
                     -Dsonar.host.url=http://54.90.138.163:9000 \
-                    -Dsonar.login=e272f2302fde0edc50634ed4e2f4143dc9169527
-                    """
+                    -Dsonar.login=e272f2302fde0edc50634ed4e2f4143dc9169527"""
                     }
                 }
             }
