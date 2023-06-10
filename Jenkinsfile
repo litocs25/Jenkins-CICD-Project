@@ -58,7 +58,7 @@ pipeline {
                 }
             }
         }
-     
+   
         stage('SonarQube scanning') {
             steps {
                 withSonarQubeEnv('SonarQube') {
@@ -78,6 +78,15 @@ pipeline {
                 timeout(time : 1, unit : 'HOURS'){
                 waitForQualityGate abortPipeline: true
                 }
+            }
+        }
+
+      stage("Store the Artifact to Nexus"){
+        sh "echo start uploading artifact to Nexus"
+        sh "${MHD}/bin/mvn deploy"
+        sh "echo end of upload to Nexus"
+        
+               }
             }
         }
 
