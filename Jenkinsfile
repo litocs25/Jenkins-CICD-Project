@@ -19,7 +19,7 @@ pipeline {
         stage('Git checkout') {
             steps {
                 echo 'Cloning the application code...'
-                git branch: 'main', url: 'https://github.com/litocs25/Jenkins-CICD-Project.git'
+                git branch: 'main', url: 'https://github.com/cvamsikrishna11/devops-fully-automated.git'
 
             }
         }
@@ -58,27 +58,27 @@ pipeline {
                 }
             }
         }
-   
+
         stage('SonarQube scanning') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    withCredentials([string(credentialsId: 'SonarQube-Token', variable: 'SONAR_TOKEN')]) {
+                    withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
                         sh """
                     mvn sonar:sonar \
-                    -Dsonar.projectKey=Canvacicd \
+                    -Dsonar.projectKey=maven \
                     -Dsonar.host.url=http://172.31.29.247:9000 \
-                    -Dsonar.login=e272f2302fde0edc50634ed4e2f4143dc9169527"""
+                    -Dsonar.login=e272f2302fde0edc50634ed4e2f4143dc9169527
+                    """
                     }
                 }
             }
         }
 
-        stage('Quality GateKeeper') {
+        stage('Quality Gate') {
             steps {
-                timeout(time : 1, unit : 'HOURS'){
                 waitForQualityGate abortPipeline: true
-                    }
-                }
+            }
+        }
 
         stage('Upload artifact to Nexus') {
             steps {
@@ -91,7 +91,7 @@ pipeline {
                
             }
         }
-    
+
         stage('Deploy to DEV env') {
             environment {
                 HOSTS = 'dev'
@@ -135,7 +135,8 @@ pipeline {
     post {
         always {
             echo 'I will always say Hello again!'
-            slackSend channel: '#isaac-jenkins-ci-cd-pipeline-alerts', color: COLOR_MAP[currentBuild.currentResult], message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
+            slackSend channel: '#team-devops', color: COLOR_MAP[currentBuild.currentResult], message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
         }
     }
 }
+.0
