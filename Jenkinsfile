@@ -82,6 +82,7 @@ pipeline {
         }
 
         stage('Upload artifact to Nexus') {
+              steps {
                 sh "echo start upoloading artifact to Nexus"
                 sh "${MHD}/bin/mvn deploy"
                 sh "echo end of upload to Nexus"
