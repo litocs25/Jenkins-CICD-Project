@@ -81,15 +81,6 @@ pipeline {
             }
         }
 
-      stage("Store the Artifact to Nexus"){
-        sh "echo start uploading artifact to Nexus"
-        sh "${MHD}/bin/mvn deploy"
-        sh "echo end of upload to Nexus"
-        
-               }
-            }
-        }
-
         stage('Upload artifact to Nexus') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'nexus-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
