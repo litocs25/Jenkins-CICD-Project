@@ -10,7 +10,7 @@
    <server>
         <id>nexus</id>
         <username>admin</username>
-        <password>{admin123}</password>
+        <password>{db/HtquBqa0H/r7UpSvsAhoUoTciU7wMd74yxbLisx0=}</password>
     </server>
 </servers>
 
