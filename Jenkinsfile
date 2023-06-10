@@ -79,9 +79,7 @@ pipeline {
                 waitForQualityGate abortPipeline: true
                     }
                 }
-            }
-        }
-}
+
         stage('Upload artifact to Nexus') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'nexus-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
