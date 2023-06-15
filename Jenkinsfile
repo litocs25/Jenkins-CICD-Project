@@ -11,7 +11,7 @@ pipeline {
     }
 
     tools {
-        maven 'localMaven'
+        maven 'maven3.9.2'
         jdk 'localJdk'
     }
 
@@ -67,7 +67,7 @@ pipeline {
                     mvn sonar:sonar \
                     -Dsonar.projectKey=maven \
                     -Dsonar.host.url=http://172.31.29.247:9000 \
-                    -Dsonar.login=e272f2302fde0edc50634ed4e2f4143dc9169527
+                    -Dsonar.login=c86bffffa08f5b3492fd99b31989f9aa0980a060
                     """
                     }
                 }
